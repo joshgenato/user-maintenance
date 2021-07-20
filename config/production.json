@@ -1,0 +1,5 @@
+{
+    "mongoURI": "mongodb+srv://jngenato:YUDGZ9aNEBGjJaYS@reactcms.dkrcc.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
+    "jwtSecret": "secret"
+  }
+  
