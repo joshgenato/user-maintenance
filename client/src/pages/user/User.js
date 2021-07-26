@@ -3,12 +3,17 @@ import Button from '@material-ui/core/Button';
 import CreateUser from './CreateUser';
 import useUsers from '../../context/users/useUsers';
 import Alert from '@material-ui/lab/Alert';
+import UserTable from './UserTable';
+import { Container } from '@material-ui/core';
 const User = () => {
 	const [openDialog, setOpenDialog] = useState(false);
-	const [showAlert, setShowAlert] = useState(false);
-
+	const [alert, setAlert] = useState({
+		type: '',
+		msg: '',
+	});
 	const useContext = useUsers();
-	const { registerUser, clearUser, userState } = useContext;
+	const { registerUser, clearUser, clearError, getUsers, userState } =
+		useContext;
 
 	const handleClickOpen = () => {
 		clearUser();
@@ -16,17 +21,35 @@ const User = () => {
 	};
 
 	const ShowAlert = (type, msg) => {
-		setShowAlert(true);
+		setTimeout(() => {
+			setAlert({ type: '', msg: '' });
+			clearError();
+		}, 5000);
 		return <Alert severity={type}>{msg}</Alert>;
 	};
 
 	useEffect(() => {
-		console.log(userState.user);
 		if (userState.user) {
-			setShowAlert(true);
-			setTimeout(() => setShowAlert(false), 5000);
+			if (userState.user.status === 200) {
+				setAlert({ type: 'success', msg: 'User was successfully saved' });
+				getUsers();
+			} else if (userState.user.status === 401) {
+				setAlert({ type: 'error', msg: userState.user.data });
+			} else {
+				setAlert({ type: 'error', msg: 'System Error, Please try again.' });
+			}
 		}
 	}, [userState.user]);
+
+	useEffect(() => {
+		if (userState.error) {
+			setAlert({ type: 'error', msg: userState.error.statusText });
+		}
+	}, [userState.error]);
+
+	useEffect(() => {
+		getUsers();
+	}, []);
 
 	return (
 		<>
@@ -37,16 +60,13 @@ const User = () => {
 				current={userState.user}
 			/>
 			<h1>User Page</h1>
-			{userState.user &&
-				showAlert &&
-				(userState.user.status === 200 ? (
-					<Alert severity='success'>User was successfully saved</Alert>
-				) : (
-					<Alert severity='error'>{userState.user.data}</Alert>
-				))}
+
+			{alert.type != '' && ShowAlert(alert.type, alert.msg)}
+
 			<Button variant='contained' color='primary' onClick={handleClickOpen}>
 				Create User
 			</Button>
+			{userState?.users && <UserTable data={userState.users.data} />}
 		</>
 	);
 };

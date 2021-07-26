@@ -4,6 +4,7 @@ import { types } from './_types';
 export const initialState = {
 	users: null,
 	user: null,
+	error: null,
 };
 
 const reducer = (state, action) => {
@@ -22,6 +23,11 @@ const reducer = (state, action) => {
 			return {
 				...state,
 				user: action.value,
+			};
+		case types.SET_ERROR:
+			return {
+				...state,
+				error: action.value,
 			};
 		default:
 			return state;

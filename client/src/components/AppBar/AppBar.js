@@ -88,7 +88,7 @@ export default function MiniDrawer(props) {
 					))}
 				</List>
 				<Divider />
-				<List>
+				{/* <List>
 					{['All mail', 'Trash', 'Spam'].map((text, index) => (
 						<ListItem button key={text}>
 							<ListItemIcon className={classes.listIcon}>
@@ -97,7 +97,7 @@ export default function MiniDrawer(props) {
 							<ListItemText primary={text} />
 						</ListItem>
 					))}
-				</List>
+				</List> */}
 			</Drawer>
 			<main className={classes.content}>
 				<div className={classes.toolbar} />

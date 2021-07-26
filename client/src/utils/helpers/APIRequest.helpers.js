@@ -11,6 +11,17 @@ export const POST = async (url, data) => {
 		});
 };
 
+export const GET = async (url, data) => {
+	return await axios
+		.get(url, data)
+		.then((res) => {
+			return res;
+		})
+		.catch(function (error) {
+			return error.response;
+		});
+};
+
 function getCookie(cname) {
 	var name = cname + '=';
 	var decodedCookie = decodeURIComponent(document.cookie);

@@ -73,6 +73,10 @@ const useStyles = makeStyles((theme) => ({
 	formControl: {
 		marginTop: theme.spacing(2),
 		minWidth: 300,
+		flexDirection: 'row',
+		verticalAlign: 'top',
+		flexWrap: 'wrap',
+		justifyContent: 'space-evenly',
 	},
 }));
 
@@ -83,11 +87,14 @@ const CreateUser = (props) => {
 
 	const [user, setUser] = useState({
 		username: '',
+		firstname: '',
+		middlename: '',
+		lastname: '',
 		email: '',
 		password: '',
 	});
 
-	const { username, email, password } = user;
+	const { username, firstname, middlename, lastname, email, password } = user;
 	const handleClose = () => {
 		setOpen(false);
 	};
@@ -106,6 +113,9 @@ const CreateUser = (props) => {
 		} else {
 			setUser({
 				username: '',
+				firstname: '',
+				middlename: '',
+				lastname: '',
 				email: '',
 				password: '',
 			});
@@ -129,15 +139,39 @@ const CreateUser = (props) => {
 								variant='outlined'
 								label='Username'
 								onChange={onChange}
-								autoComplete={false}
+								autoComplete='off'
 								value={username}
+							/>
+							<TextField
+								name='firstname'
+								variant='outlined'
+								label='First Name'
+								onChange={onChange}
+								autoComplete='off'
+								value={firstname}
+							/>
+							<TextField
+								name='middlename'
+								variant='outlined'
+								label='Middle Name'
+								onChange={onChange}
+								autoComplete='off'
+								value={middlename}
+							/>
+							<TextField
+								name='lastname'
+								variant='outlined'
+								label='Last Name'
+								onChange={onChange}
+								autoComplete='off'
+								value={lastname}
 							/>
 							<TextField
 								name='email'
 								variant='outlined'
 								label='Email'
 								onChange={onChange}
-								autoComplete={false}
+								autoComplete='off'
 								value={email}
 							/>
 							<TextField
@@ -146,7 +180,7 @@ const CreateUser = (props) => {
 								label='Password'
 								onChange={onChange}
 								type='password'
-								autoComplete={false}
+								autoComplete='off'
 								value={password}
 							/>
 						</FormControl>

@@ -17,6 +17,9 @@ router.post('/register', async (req, res) => {
 			const newUser = new User({
 				username: req.body.username,
 				email: req.body.email,
+				firstname: req.body.firstname,
+				middlename: req.body.middlename,
+				lastname: req.body.lastname,
 				password: hashedPass,
 			});
 			const user = await newUser.save();
@@ -25,7 +28,7 @@ router.post('/register', async (req, res) => {
 			res.status(401).json('User already exist!');
 		}
 	} catch (err) {
-		req.status(500).json(err);
+		res.status(500).json(err);
 	}
 });
 

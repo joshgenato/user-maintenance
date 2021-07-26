@@ -13,4 +13,8 @@ export const actions = {
 		type: types.CLEAR_USER,
 		value: null,
 	}),
+	set_error: (error) => ({
+		type: types.SET_ERROR,
+		value: error,
+	}),
 };
