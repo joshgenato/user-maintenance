@@ -29,6 +29,11 @@ const reducer = (state, action) => {
 				...state,
 				error: action.value,
 			};
+		case types.UPDATE_USER:
+			return {
+				...state,
+				user: action.value,
+			};
 		default:
 			return state;
 	}

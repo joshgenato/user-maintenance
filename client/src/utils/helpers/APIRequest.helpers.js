@@ -22,6 +22,28 @@ export const GET = async (url, data) => {
 		});
 };
 
+export const PUT = async (url, data) => {
+	return await axios
+		.put(url, data)
+		.then((res) => {
+			return res;
+		})
+		.catch(function (error) {
+			return error.response;
+		});
+};
+
+export const DELETE = async (url) => {
+	return await axios
+		.delete(url)
+		.then((res) => {
+			return res;
+		})
+		.catch(function (error) {
+			return error.response;
+		});
+};
+
 function getCookie(cname) {
 	var name = cname + '=';
 	var decodedCookie = decodeURIComponent(document.cookie);

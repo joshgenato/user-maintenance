@@ -17,4 +17,8 @@ export const actions = {
 		type: types.SET_ERROR,
 		value: error,
 	}),
+	update_user: (user) => ({
+		type: types.UPDATE_USER,
+		value: user,
+	}),
 };

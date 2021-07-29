@@ -80,10 +80,10 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-const CreateUser = (props) => {
+const UserForm = (props) => {
 	const classes = useStyles();
 
-	const { open, setOpen, registerUser, current } = props;
+	const { open, setOpen, registerUser, current, dialogTitle } = props;
 
 	const [user, setUser] = useState({
 		username: '',
@@ -95,6 +95,7 @@ const CreateUser = (props) => {
 	});
 
 	const { username, firstname, middlename, lastname, email, password } = user;
+
 	const handleClose = () => {
 		setOpen(false);
 	};
@@ -108,7 +109,8 @@ const CreateUser = (props) => {
 	};
 
 	useEffect(() => {
-		if (current !== null) {
+		if (current) {
+			console.log(current);
 			setUser(current);
 		} else {
 			setUser({
@@ -129,7 +131,7 @@ const CreateUser = (props) => {
 				aria-labelledby='customized-dialog-title'
 				open={open}>
 				<DialogTitle id='customized-dialog-title' onClose={handleClose}>
-					Create User
+					{dialogTitle}
 				</DialogTitle>
 				<form className={classes.form} noValidate onSubmit={onSubmit}>
 					<DialogContent dividers>
@@ -196,4 +198,4 @@ const CreateUser = (props) => {
 	);
 };
 
-export default CreateUser;
+export default UserForm;

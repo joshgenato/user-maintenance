@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import Button from '@material-ui/core/Button';
-import CreateUser from './CreateUser';
 import useUsers from '../../context/users/useUsers';
 import Alert from '@material-ui/lab/Alert';
 import UserTable from './UserTable';
 import { Container } from '@material-ui/core';
+import UserForm from './UserForm';
 const User = () => {
 	const [openDialog, setOpenDialog] = useState(false);
 	const [alert, setAlert] = useState({
@@ -12,8 +12,15 @@ const User = () => {
 		msg: '',
 	});
 	const useContext = useUsers();
-	const { registerUser, clearUser, clearError, getUsers, userState } =
-		useContext;
+	const {
+		registerUser,
+		clearUser,
+		clearError,
+		getUsers,
+		updateUser,
+		deleteUser,
+		userState,
+	} = useContext;
 
 	const handleClickOpen = () => {
 		clearUser();
@@ -53,7 +60,8 @@ const User = () => {
 
 	return (
 		<>
-			<CreateUser
+			<UserForm
+				dialogTitle='Create User'
 				open={openDialog}
 				setOpen={setOpenDialog}
 				registerUser={registerUser}
@@ -66,7 +74,14 @@ const User = () => {
 			<Button variant='contained' color='primary' onClick={handleClickOpen}>
 				Create User
 			</Button>
-			{userState?.users && <UserTable data={userState.users.data} />}
+			{userState?.users && (
+				<UserTable
+					data={userState.users.data}
+					updateUser={updateUser}
+					deleteUser={deleteUser}
+					reloadTable={getUsers}
+				/>
+			)}
 		</>
 	);
 };
